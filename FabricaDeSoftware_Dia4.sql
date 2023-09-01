@@ -1,4 +1,5 @@
-CREATE DATABASE farmacia
+CREATE DATABASE farmacia;
+USE farmacia;
 
 CREATE TABLE cliente (
     nome varchar(50),
@@ -16,8 +17,8 @@ CREATE TABLE funcionario (
     telefone varchar(15)
 );
 
-CREATE TABLE produto (
-    id int PRIMARY KEY,
+CREATE TABLE produto(
+    id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(50),
     tipo varchar(15),
     preco float,
@@ -45,17 +46,31 @@ ALTER TABLE vende ADD CONSTRAINT FK_vende_2
     ON DELETE SET NULL;
 	
 	
-	
-INSERT INTO cliente values ('João','000.000.000.00','joao@unipe','AV.cabo branco','(83)00000-0000' )
-INSERT INTO cliente values ('pedro','000.000.000.01','pedro@unipe','AV.Nego','(83)00000-0000' )
-INSERT INTO cliente values ('rafael','000.000.000.02','rafael@unipe','AV.cabo branco','(83)00000-0000')
-INSERT INTO cliente values ('suenia','000.000.000.03','suenia@unipe','AV.Nego','(83)00000-0000' )
-INSERT INTO cliente values ('rafaela','000.000.000.04','rafaela@unipe','AV.cabo branco','(83)00000-0000' )
+--- INSERINDO OS DADOS EM CADA TABELA ---	
+INSERT INTO cliente values ('João','000.000.000.00','joao@unipe','AV.cabo branco','(83)00000-0000' );
+INSERT INTO cliente values ('pedro','000.000.000.01','pedro@unipe','AV.Nego','(83)00000-0000' );
+INSERT INTO produto (nome, tipo, preco) values ('Venvanse','tarja preta', '400');
+INSERT INTO produto (nome, tipo, preco) values ('Amitriptilina','tarja vermelha','350');
+INSERT INTO funcionario values ('renata','000.000.000.14','renata@unipe','AV.cabo branco','(83)00000-0000' );
+INSERT INTO funcionario values ('rafaela','000.000.000.04','rafaela@unipe','AV.Nego','(83)00000-0000' );
+
+--- SELECIONANDO OS DADOS EM CADA TABELA ---
+SELECT * FROM cliente;
+SELECT * FROM produto;
+SELECT * FROM funcionario;
 
 
-DELETE FROM cliente WHERE endereco = 'AV.Nego'
+--- VENDO TUDO E SELECIONANDO ESPECIFICAMENTE OS DADOS EM CADA TABELA ---
+SELECT nome,cpf_cliente FROM cliente where nome = 'João';
+SELECT preco FROM produto where tipo = 'tarja vermelha';
+SELECT nome,telefone FROM funcionario where nome = 'AV.Nego';
 
-SELECT * FROM cliente
+--- DELETANDO UMA COLUNA DE CADA TABELA ---
+ALTER TABLE cliente DROP COLUMN telefone;
+ALTER TABLE funcionario DROP COLUMN email;
+ALTER TABLE produto DROP COLUMN tipo;
+------------------------------------------------------------------------
 
-SELECT * FROM cliente where nome = 'João'
 
+--- IMPORTANDO UM DATASET DO KAGGLE ---
+SELECT * FROM covid;
